@@ -6,7 +6,7 @@ One failure row per generation that broke. Pick the single most important type; 
 |---|---|
 | geometry | Walls, corners, ceiling line or floor plane shifted, warped or re-proportioned |
 | opening | A door or window added, removed, resized or moved |
-| scale | Furniture more than 10% off against the door ruler |
+| scale | Furniture obviously too big or too small against the console, couch and stool (more than 10% off when it can be measured) |
 | placement | Furniture in the wrong spot, floating, intersecting a wall, or blocking the path |
 | identity | The piece does not match the reference (shape, material, color) |
 | shadow | Shadow direction wrong, or contact shadows missing |

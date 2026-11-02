@@ -1,5 +1,7 @@
 # Pre-flight (ticket T2, Linear HEL-64)
 
+Status: done as a pilot on 2026-11-02 (one Agent edit on the living room, 25 credits, 475 left; Agent accepts more than one image; the image model is not shown). Findings are in `PROMPT.md` (Surface settings) and the HEL-64 comments. The pilot is not a case and is not in the CSV. The checklist below is kept as the record of what was asked.
+
 Goal: learn the constraints and rehearse the rubric on one throwaway run, spending free credits only. This run is not a case and never goes in the results CSV.
 
 ## Do
