@@ -93,7 +93,7 @@ def validate_file(path):
             key = (row["case_id"], row["attempt"])
             if key in seen_attempts:
                 problems.append(
-                    f"row {n}: case_id {key[0]!r} attempt {key[1]} already used on row {seen_attempts[key]}"
+                    f"row {n}: attempt {key[1]} already used for case_id {key[0]!r} on row {seen_attempts[key]}"
                 )
             seen_attempts.setdefault(key, n)
             rows.append(row)

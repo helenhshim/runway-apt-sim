@@ -18,6 +18,7 @@ Case study: https://www.helenshim.me/projects/astra-room-models
 Python 3 standard library only (SQLite is built in).
 
 ```bash
+python3 log_run.py log.csv               # answer prompts to add one generation; validates before saving
 python3 validate_log.py log.csv          # prints "row N: problem" lines, exit 1 if any
 python3 export_json.py log.csv results.json   # validates, loads SQLite, rolls up, writes results.json
 python3 export_json.py log.csv results.json --db eval.db   # also keep the DB to query the views in rollup.sql
@@ -25,6 +26,7 @@ python3 -m unittest discover -s tests -v      # tests use fake rows only, number
 ```
 
 - `schema.sql`: the `runs` table, one row per generation, 18 columns in log order. Row 1 of the CSV is the header, so the first data row is "row 2".
+- `log_run.py`: asks for the 18 fields one at a time, fills `run_id` for you, defaults surface, model_shown and prompt_id to the previous row, re-asks any bad answer, and only saves a row that passes the validator. Ctrl-C saves nothing. You can also edit the CSV by hand.
 - `validate_log.py`: rejects missing surface, model_shown or credits, bad failure_type (must be one of geometry, opening, scale, placement, identity, shadow, reflection, material, hallucination, side_effect), severity not 1 to 3, scores not 1 to 5, landmarks_kept not 0 to 8, failure_type without severity (or the reverse), duplicate run_id and duplicate case_id + attempt. "model not shown" is a valid model_shown entry.
 - `rollup.sql`: views for means and best-of-2 per room, acceptable rate, credits and minutes per acceptable image, failures by type and severity, and H1 to H5 helpers. H5 leaves out rows where model_shown is "not shown", "unknown", "n/a", "na" or "none".
 - H2 note: scale has no score of its own, so `h2_scale_vs_layout` compares the share of runs with scale_error_pct above 10 against the share with layout <= 2, and shows mean layout beside mean furniture.
