@@ -20,6 +20,7 @@ Goal: learn the constraints and rehearse the rubric on one throwaway run, spendi
 | Credits actually charged |  |
 | Minutes from start to output |  |
 | Accepts a furniture reference image? |  |
+| Accepts more than one image at once (room + dining nook + chair, for prompt v2)? |  |
 | Output size and aspect ratio vs the input |  |
 | Watermark on the export? Export resolution? (the guide says free tiers often limit these) |  |
 | Photo quality check: bright, sharp, high resolution, straight verticals, original saved separately |  |

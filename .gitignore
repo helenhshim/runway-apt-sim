@@ -1,3 +1,5 @@
 results.json
 *.db
 __pycache__/
+evidence/*
+!evidence/README.md
