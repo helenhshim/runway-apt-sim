@@ -31,3 +31,11 @@ Design
 - Do not use one attempt of each as the two repeats; the repeats measure variance, the condition measures the effect of context.
 - Hypothesis H6: the extra context improves the furniture and scale scores for the living room. It is disproved if scale error and furniture score are no better under v2.
 - No product link in any prompt: attach the product image instead. The piece's size comes from the product page (The Wassily: H 31.5 in, W 30.3 in, D 29.1 in per thorvalddesign.com; the centimetre figures are conversions).
+
+## Surface settings and logging (frozen with the protocol)
+
+- Surface: Runway Agent in Ask mode (not Auto), so the plan and the cost are visible before each run. Optimize generations is set to Quality for every formal run. A Cost-optimized run is an optional comparison, logged as its own case, because the setting changes routing and credit cost (hypothesis H5).
+- The model named in the chat (for example Sonnet 5.5) is the orchestrator, not the image model. Record it in `notes`. `model_shown` is the image model, and "not shown" is a valid answer.
+- Agent rewrites the prompt before it calls the image model; the "Generated image" step shows its own version. Expand it and screenshot it for every run, and note in `notes` whether the rewrite dropped or changed a clause.
+- `minutes` runs from the approval click to the finished image; note how many approvals were needed.
+- `credits` is the cost shown on the approval card if there is one, otherwise the balance difference before and after.
