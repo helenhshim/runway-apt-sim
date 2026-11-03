@@ -16,7 +16,7 @@ COLUMNS = [
 ]
 FAILURE_TYPES = {
     "geometry", "opening", "scale", "placement", "identity", "shadow", "reflection",
-    "material", "hallucination",
+    "material", "hallucination", "invented_area",
     "flicker", "morph", "pop", "drift", "path_ignored", "render_look",
 }
 ARMS = {"A", "B", "C"}

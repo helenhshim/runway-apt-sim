@@ -1,66 +1,67 @@
-# P2: Astra walkthrough to photoreal video (DRAFT, not frozen)
+# P2: Astra render to real-world video (DRAFT, not frozen)
 
 P1 (`protocol/`, frozen at 1e24e9e) tested image staging and stopped after one formal run. P2 is the headline. Nothing in `protocol/` changes.
 
-- **Question:** given a camera path recorded in my Astra 3D model of the living room, which video model turns it into footage that looks like my real apartment while keeping the Astra layout and furniture intact frame to frame, and what does one acceptable clip cost?
-- **Why this test:** I want to see my real apartment with the furniture I have planned, as realistic as possible. The Astra model fixes the plan; the video model's job is to make it look real without breaking it.
+- **Question:** starting from one eye-level Astra render of my planned living room, which image-to-video model turns it into a walkthrough that looks like my real apartment while keeping the plan and the room intact as the camera moves, and what does one acceptable clip cost?
+- **Why this test:** I want to see my real apartment with the furniture I planned, as real-world video. Going from a 3D plan straight to video tests scene understanding, which is where Runway is heading (GWM).
 - **Surface:** Runway's video model picker, model chosen by hand. Not Agent: in P1, Agent picked the model (Nano Banana Pro), and here the model is the variable.
-- **Arms:** Runway Aleph 2.0 against Seedance 2.5 and Gemini Omni Flash, all in the same picker at 720p, 5 s. Picked functional first, then by leaderboard rank; reasoning and sources in `MODEL_SELECTION.md`. Swap rule: Wan 3.0 or MiniMax H3 replaces Gemini Omni Flash if either offers editing in the picker (checked in pre-flight).
-- **Design:** 1 scenario x 3 arms x 2 attempts = 6 scored clips. Same input video, prompt, references and duration for every arm. Interleaved run order. Shuffled, renamed clips for scoring.
-- **Rule:** the rubric, prompt, inventory and log schema are committed before the first scored clip. The commit history shows it.
-- **Status:** draft. One scorer, one pass, one room, n = 2 per arm.
+- **Arms (locked 2026-11-03):** A = Runway Gen-4.5, B = Seedance 2.5, C = Gemini Omni 1.1 Flash. All at 720p, 16:9, 5 s, start frame only. Picked functional first (takes a start image), then by image-to-video leaderboard rank, then in the picker; see `I2V_RESEARCH.md`.
+- **Probe, not scored against the arms:** GWM Worlds, Runway's world model built on Gen-4.5. Gate before the freeze: the Astra still uploads as the first frame, a 5 s clip exports, and a credit cost shows. If any fails, that is a finding and GWM stays out.
+- **Design:** build first (3 iterations per arm, logged, never scored), then a frozen eval of 3 arms x 2 attempts = 6 scored clips. Same start frame, prompt, settings and duration for every arm. Interleaved run order. Shuffled, renamed clips for scoring.
+- **Rule:** the rubric, prompt, inventory and log schema are committed and pushed to a public repo before the first scored clip.
+- **Status:** draft. One scorer, one room, n = 2 per arm.
 
-Astra renders and the Astra model are AI-generated from photos, not measured.
+The Astra render is AI-generated from photos, not measured.
 
 ## Files
 | File | What |
 |---|---|
-| `PROMPT.md` | Inputs, prompt text, settings, run order |
-| `INVENTORY.md` | Landmarks and furniture pieces, read off the input recording before the freeze |
+| `PROMPT.md` | Inputs, build prompts, eval prompt slot, settings per arm, run order, GWM probe |
+| `INVENTORY.md` | Landmarks and furniture read off the Astra start frame, the input baseline check, ground-truth files |
 | `RUBRIC.md` | Four criteria, 1 to 5 anchors, acceptable gut call, severity |
-| `FAILURE_TYPES.md` | P1 types that still apply plus temporal ones (must match `validate_p2.py`) |
-| `schema.sql`, `validate_p2.py` | 24-column log, one row per clip, and its validator |
+| `FAILURE_TYPES.md` | Failure types, including temporal ones (must match `validate_p2.py`) |
+| `schema.sql`, `validate_p2.py` | 24-column log, one row per scored clip, and its validator |
 | `blind.py` | Copies clips to random ids for scoring, key kept in `evidence/` |
+| `I2V_RESEARCH.md` | Current model research (image to video, GWM, failure modes) |
+| `MODEL_SELECTION.md`, `EVAL_RESEARCH.md` | Earlier research pass (video editing, eval methods, world models) |
 | `tests/` | Fake rows only: `python3 -m unittest discover -s p2/tests -v` |
 
-## Hypotheses (each can be disproved; n = 2 per arm, so directional only)
-| # | Hypothesis | Disproved if |
-|---|---|---|
-| H1 | My hunch: Aleph has the highest acceptable rate | Another arm's acceptable rate matches or beats Aleph's |
-| H2 | Realism is easier than fidelity: every arm scores lower on the mean of geometry and plan than on realism | Fidelity mean >= realism mean for 2 or more arms |
-| H3 | Retries drive cost: best-of-2 beats the mean by more than 0.5 on the four-criterion average | The gap is 0.5 or less, averaged over arms |
-| H4 | Credits per acceptable clip differ by more than 2x across arms | All arms with an acceptable clip are within 2x, or fewer than 2 arms have one |
+## Hypotheses
+Drafts are in the PRD. Helen rewrites them in her own words, at most three, and they are copied here before the freeze with what would disprove each.
 
 ## Fairness rules
-- Same input video, prompt text and reference images for every arm. If one chosen arm cannot take a reference image, no arm gets one (the prompt describes the materials in words either way).
-- Same output duration and aspect ratio where the model allows; anything forced is logged in `notes`.
-- Model defaults otherwise. Audio off. Any prompt enhancer or "improve prompt" toggle off.
-- Run order interleaved: arm 1, arm 2, arm 3 for attempt 1, then the same for attempt 2.
+- Same start frame (`evidence/p2_astra_start.png`), prompt text and settings for every arm.
+- A reference image or a last frame is used only if every scored arm accepts it; otherwise no arm gets it.
+- 720p, 16:9, 5 s for every arm; anything a model forces is logged in `notes`.
+- Model defaults otherwise. Audio off. Any prompt enhancer off.
+- Run order interleaved: A, B, C for attempt 1, then the same for attempt 2.
 - First outputs only. No prompt changes after the freeze; a changed prompt is a new version, committed before use, never mixed.
-- Scoring in a separate pass, on clips renamed by `blind.py`. I generated them, so I may recognize a model's style; the page says so.
+- Scoring in a separate pass, on clips renamed by `blind.py`. I may recognize a model's style; the page says so.
 
-## Stop rules
+## Stop rules and fallback ladder
 - Exactly 2 scored clips per arm, acceptable or not.
-- An error, refusal or timeout gets one retry with nothing changed. It is not a scored clip, but its credits are logged in `notes` and counted in the ledger.
-- If pre-flight prices put the plan over the cap, drop an arm before the freeze, never mid-run.
-- Stop all generation at the cap.
+- An error, refusal or timeout gets one retry with nothing changed. Not scored; credits logged in `notes` and the ledger.
+- Fallback ladder, decided now: if the build shows no arm can hold a 5 s push, the eval uses a 3 s push; if that fails too, a locked-off shot with subtle motion. The step is chosen at the freeze from build evidence, never mid-eval.
+- If prices put the plan over the cap, drop an arm before the freeze, never mid-run.
 
-## Budget (fill from the app in pre-flight, before the freeze)
-| Arm | Model (as the picker names it) | Credits per clip at the chosen duration |
-|---|---|---|
-| A | Aleph 2.0 | FILL |
-| B | FILL | FILL |
-| C | FILL | FILL |
+## Budget (from Runway's pages; fill from the app before the freeze)
+| Arm | Model | Credits per 5 s at 720p (listed) | From the app |
+|---|---|---|---|
+| A | Gen-4.5 | about 60 | FILL |
+| B | Seedance 2.5 | about 150 (80 minimum) | FILL |
+| C | Gemini Omni 1.1 Flash | about 50 | FILL |
 
-Plan = 2 x (A + B + C) + one pre-flight clip on the cheapest arm + up to 3 retries at the most expensive arm's price. Cap = the observed balance before the first scored clip. Balance observed 2026-11-02: 420.
+5 clips per arm (3 build, 2 eval) is about 1,300 credits plus drafts and retries. Runway Pro for one month.
 
 ## Filled before the freeze
-1. Arm names and prices (table above).
-2. Whether each arm accepts an input video and a reference image, and its duration options (`PROMPT.md`).
-3. The input recording saved and its landmarks and pieces written in `INVENTORY.md`.
-4. One unscored pre-flight clip, scored with this rubric as a rehearsal; any anchor that is a coin flip gets fixed.
+1. Prices and input support per arm (tables above and in `PROMPT.md`).
+2. Start frame saved, its landmarks and pieces written in `INVENTORY.md`, and the input baseline check done.
+3. The eval prompt chosen from the build iterations, with the reason.
+4. The fallback ladder step chosen from build evidence.
+5. Hypotheses copied in.
+6. Rubric-critic agent review done, accepted changes logged.
 
 ## What is reused from P1 and what changed
-- Reused: frozen-first rule, 1 to 5 anchors decidable without gut feel, overlay check, typed failure log with severity 1 to 3, acceptable gut call before scoring, CSV then validate then SQLite roll-up, fake-row tests.
-- Changed: new criteria (geometry fidelity to the input path, plan fidelity, realism against the real photos, temporal consistency), new failure types, new 24-column log with `arm`, `blind_id` and clip fields. `validate_log.py`, `rollup.sql` and `export_json.py` stay P1-only.
-- Not yet built: the P2 roll-up and JSON export. They do not change what is recorded, so they can come after the freeze. `results.json` is read by the portfolio page; the P2 export will be a new file, `p2/results_p2.json`, so the P1 shape is untouched.
+- Reused: frozen-first rule, anchors decidable without gut feel, typed failure log with severity 1 to 3, acceptable gut call before scoring, CSV then validate, fake-row tests.
+- Changed: image to video instead of image editing; criteria are real-room fidelity, plan fidelity, realism and temporal and scene consistency; new failure types; a 24-column log with `arm` and `blind_id`. The column names `geometry` and `temporal` keep their names but follow the new definitions in `RUBRIC.md`.
+- Not yet built: the build log check and the P2 summary script that writes `p2/results_p2.json` (the P1 `results.json` shape is untouched).
