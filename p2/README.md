@@ -5,7 +5,7 @@ P1 (`protocol/`, frozen at 1e24e9e) tested image staging and stopped after one f
 - **Question:** given a camera path recorded in my Astra 3D model of the living room, which video model turns it into footage that looks like my real apartment while keeping the Astra layout and furniture intact frame to frame, and what does one acceptable clip cost?
 - **Why this test:** I want to see my real apartment with the furniture I have planned, as realistic as possible. The Astra model fixes the plan; the video model's job is to make it look real without breaking it.
 - **Surface:** Runway's video model picker, model chosen by hand. Not Agent: in P1, Agent picked the model (Nano Banana Pro), and here the model is the variable.
-- **Arms:** Runway Aleph 2.0 against two other edit-video models hosted in the same picker. Chosen in pre-flight from Kling 4.0, Gemini Omni Flash and Grok Imagine, by price and by whether each accepts an input video plus a reference image. Final names go in the table below before the freeze.
+- **Arms:** Runway Aleph 2.0 against Seedance 2.5 and Gemini Omni Flash, all in the same picker at 720p, 5 s. Picked functional first, then by leaderboard rank; reasoning and sources in `MODEL_SELECTION.md`. Swap rule: Wan 3.0 or MiniMax H3 replaces Gemini Omni Flash if either offers editing in the picker (checked in pre-flight).
 - **Design:** 1 scenario x 3 arms x 2 attempts = 6 scored clips. Same input video, prompt, references and duration for every arm. Interleaved run order. Shuffled, renamed clips for scoring.
 - **Rule:** the rubric, prompt, inventory and log schema are committed before the first scored clip. The commit history shows it.
 - **Status:** draft. One scorer, one pass, one room, n = 2 per arm.
