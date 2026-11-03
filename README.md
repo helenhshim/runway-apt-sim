@@ -1,35 +1,50 @@
-# staging-eval
+# runway-apt-sim
 
-A small eval of Runway's image staging on three rooms of one apartment, compared with Astra renders, scored against the real photo.
+Can a video model go from my 3D furniture plan straight to a real-world video of my apartment? A small, pre-registered eval of Runway's models against the strongest other models Runway hosts, run on one real living room.
 
-- **Question:** does Runway keep a room's layout, light and scale intact while adding furniture, and what does one acceptable image cost?
-- **Design:** 3 rooms x 2 attempts, one frozen prompt template, three criteria scored 1 to 5 (layout fidelity, lighting and material realism, furniture accuracy), a typed failure log.
-- **Rule:** the rubric, prompt template and CSV schema are committed before the first generation. The commit history shows it.
-- **Status:** preliminary. One scorer, one pass, three rooms.
+- **Question:** starting from one eye-level render of my planned living room (made in Astra), which image-to-video model turns it into a walkthrough that looks like my real apartment while keeping the plan and the room intact as the camera moves, and what does one acceptable clip cost?
+- **Models:** Runway Gen-4.5, Seedance 2.5 and Gemini Omni 1.1 Flash, all at 720p, 16:9, 5 s from the same start frame, chosen by hand in Runway's video picker. GWM Worlds, Runway's world model built on Gen-4.5, runs as a probe on the same still.
+- **Design:** build first (3 logged iterations per model), then a frozen eval of 3 models x 2 clips, scored blind on real-room fidelity, plan fidelity, realism, and temporal and scene consistency. Real photos and a phone walk of the same path are the ground truth; the models never see them.
+- **Rule:** the rubric, prompt and log schema are committed before the first scored clip. The commit history shows it.
+- **Status:** P2 protocol in draft, not frozen. One scorer, one room, n = 2 per model.
 
-Astra renders are AI-generated from photos, not measured models.
+The Astra render is AI-generated from photos, not measured.
 
-Tickets: Linear project "Runway staging eval (P1)". Board: `.scratch/staging-eval/BOARD.md`.
-PRD: https://claude.ai/artifact/PN7G29thMiNKNDmedyiSn6
-Case study: https://www.helenshim.me/projects/astra-room-models
+## What is where
+
+| Folder | What |
+|---|---|
+| `p2/` | The current eval: protocol (`README`, `PROMPT`, `RUBRIC`, `INVENTORY`, `FAILURE_TYPES`), research (`I2V_RESEARCH`, `MODEL_SELECTION`, `EVAL_RESEARCH`), log schema, validator, blind-scoring script, tests |
+| `protocol/` | P1, the image staging pilot, frozen at commit 1e24e9e and never edited |
+| root `*.py`, `*.sql`, `tests/` | P1 log, validation, SQL roll-up and JSON export |
+| `evidence/` | Inputs, photos and clips; gitignored, only its README is tracked |
 
 ## Run it
 
-Python 3 standard library only (SQLite is built in).
+Python 3 standard library only.
 
 ```bash
-python3 log_run.py log.csv               # answer prompts to add one generation; validates before saving
-python3 validate_log.py log.csv          # prints "row N: problem" lines, exit 1 if any
-python3 export_json.py log.csv results.json   # validates, loads SQLite, rolls up, writes results.json
-python3 export_json.py log.csv results.json --db eval.db   # also keep the DB to query the views in rollup.sql
-python3 -m unittest discover -s tests -v      # tests use fake rows only, numbers hand-computed in the test file
+python3 p2/validate_p2.py p2/log.csv                 # check the P2 log; add --unscored-ok before scoring
+python3 p2/blind.py evidence/p2_clips evidence/p2_blind evidence/p2_blind_key.csv   # shuffle clips for blind scoring
+python3 -m unittest discover -s p2/tests -v          # P2 tests, fake rows only
+python3 -m unittest discover -s tests -v             # P1 tests
 ```
 
-- `schema.sql`: the `runs` table, one row per generation, 18 columns in log order. Row 1 of the CSV is the header, so the first data row is "row 2".
-- `log_run.py`: asks for the 18 fields one at a time, fills `run_id` for you, defaults surface, model_shown and prompt_id to the previous row, re-asks any bad answer, and only saves a row that passes the validator. Ctrl-C saves nothing. You can also edit the CSV by hand.
-- `validate_log.py`: rejects missing surface, model_shown or credits, bad failure_type (must be one of geometry, opening, scale, placement, identity, shadow, reflection, material, hallucination, side_effect), severity not 1 to 3, scores not 1 to 5, landmarks_kept not 0 to 8, failure_type without severity (or the reverse), duplicate run_id and duplicate case_id + attempt. "model not shown" is a valid model_shown entry.
-- `rollup.sql`: views for means and best-of-2 per room, acceptable rate, credits and minutes per acceptable image, failures by type and severity, and H1 to H5 helpers. H5 leaves out rows where model_shown is "not shown", "unknown", "n/a", "na" or "none".
-- H2 note: scale has no score of its own, so `h2_scale_vs_layout` compares the share of runs with scale_error_pct above 10 against the share with layout <= 2, and shows mean layout beside mean furniture.
-- `results.json` shape is read by the portfolio page. Do not change it without telling Helen. `acceptable` is a boolean there, blank failure_type and severity are null, and `credits_per_acceptable` and `minutes_per_acceptable` are null if nothing was acceptable.
+P1 tools (`log_run.py`, `validate_log.py`, `export_json.py`, `rollup.sql`) are documented in the P1 section below.
 
-Scaffolding (validation script, SQL roll-up, JSON export, tests) was written with Claude Code.
+## P1: image staging pilot
+
+The project started as a test of Runway image staging: add one chair to a photo of my living room without breaking the room. The protocol was frozen in 1e24e9e before the first run. It stopped after one formal run, because Runway Agent routed the edit to Nano Banana Pro, a third-party image model, so it was testing Runway's product layer rather than Runway's own models. It is reported as a pilot (n = 1), with that routing finding and the card cost (20 credits) against the all-in cost (30).
+
+- `log_run.py` asks for one generation's fields and saves a row only if it validates.
+- `validate_log.py` checks the 18-column P1 log.
+- `export_json.py` validates, loads SQLite, runs `rollup.sql` and writes `results.json` (shape read by the portfolio page; do not change it without telling Helen).
+
+## Links
+
+- PRD: https://claude.ai/artifact/KJg6jC6r43XgmDL9qmUNJ3 (with Research and Files tabs)
+- Technical design: https://claude.ai/artifact/HjRds5ARxNi57dgayN8mLQ
+- Tickets: Linear project "Runway eval: Astra render to real-world video (P2)"
+- Case study: https://www.helenshim.me/projects/astra-room-models
+
+Scaffolding (validators, blind-scoring script, roll-up, tests) was written with Claude Code.
