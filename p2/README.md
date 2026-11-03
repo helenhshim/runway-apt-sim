@@ -22,9 +22,32 @@ The Astra render is AI-generated from photos, not measured.
 | `FAILURE_TYPES.md` | Failure types, including temporal ones (must match `validate_p2.py`) |
 | `schema.sql`, `validate_p2.py` | 24-column log, one row per scored clip, and its validator |
 | `blind.py` | Copies clips to random ids for scoring, key kept in `evidence/` |
+| `build_log.csv`, `validate_build_log.py` | One row per build generation (never scored) and its check |
+| `prompts/` | Build prompts `b01`, `b02` (and `b03` once chosen), exactly as pasted into the app |
 | `I2V_RESEARCH.md` | Current model research (image to video, GWM, failure modes) |
 | `MODEL_SELECTION.md`, `EVAL_RESEARCH.md` | Earlier research pass (video editing, eval methods, world models) |
 | `tests/` | Fake rows only: `python3 -m unittest discover -s p2/tests -v` |
+
+## Logging a build generation
+Within 5 minutes of each generation, add one row to `build_log.csv` (or tell Claude in this session and it adds the row), then run:
+
+```bash
+python3 p2/validate_build_log.py p2/build_log.csv
+```
+
+| Column | What goes in it |
+|---|---|
+| when | `2026-11-03 18:05` |
+| model | As the picker names it, for example `Gen-4.5` |
+| iteration | `b01`, `b02`, `b03`, `demo` or `draft` |
+| prompt_id | The prompt file used, for example `b01` |
+| changed | The one thing changed from the last try (blank on the first) |
+| credits_shown, balance_after | The cost on screen and the balance after; at least one is required |
+| minutes | Generate click to finished clip |
+| output_file | The clip's file name in `evidence/`, unique per row |
+| keep | `yes` or `no`: would I show it |
+| tag | `broke`, `surprised`, `cost`, `ux`, `routing` or `quality` |
+| observation | One or two sentences in my words, with a timestamp in the clip if something broke |
 
 ## Hypotheses
 Drafts are in the PRD. Helen rewrites them in her own words, at most three, and they are copied here before the freeze with what would disprove each.
