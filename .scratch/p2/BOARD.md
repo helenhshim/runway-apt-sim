@@ -23,7 +23,7 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | Ticket | Linear | What | Owner | Status | Blocked by | Due |
 |---|---|---|---|---|---|---|
 | T19 | HEL-84 | Inputs ready: photos, walk, renders, app checks | Helen | In Progress (re-renders made, not yet saved) | none | Nov 3 |
-| T20 | HEL-85 | Build log, test-first | agent | Todo | none | Nov 3 |
+| T20 | HEL-85 | Build log, test-first | agent | Done, verified (2bb46cd, 20 P2 tests pass) | none | Nov 3 |
 | T22 | HEL-86 | Gen-4.5 build: MVP clip | Helen | Todo | T19, T20 | Nov 3 |
 | T21 | HEL-87 | Inventory and input baseline | agent + Helen | Backlog | T19 | Nov 4 |
 | T23 | HEL-88 | Seedance 2.5 build | Helen | Backlog | T19, T20 | Nov 4 |
