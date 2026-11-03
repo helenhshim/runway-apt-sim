@@ -90,6 +90,6 @@ Pick the single most important failure type (`FAILURE_TYPES.md`); mention others
 - 3: the room or a hero piece is not recognizable, an opening is wrong, or it still looks like a render; unusable.
 
 ## Checking the eval itself
-- Rubric-critic agent review before the freeze; accepted changes logged in the PRD decision log.
+- Rubric rehearsed on one build clip before the freeze; any coin-flip anchor fixed and logged in the PRD decision log.
 - One automated metric beside criterion 4 (frame-to-frame consistency; method fixed at the freeze; see `EVAL_RESEARCH.md`).
 - If time allows, re-score 3 of the 6 clips at least 24 hours later, reshuffled, without looking at the first scores.

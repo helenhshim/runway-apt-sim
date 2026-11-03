@@ -59,7 +59,7 @@ Drafts are in the PRD. Helen rewrites them in her own words, at most three, and 
 3. The eval prompt chosen from the build iterations, with the reason.
 4. The fallback ladder step chosen from build evidence.
 5. Hypotheses copied in.
-6. Rubric-critic agent review done, accepted changes logged.
+6. Rubric rehearsed on one build clip; fixes logged.
 
 ## What is reused from P1 and what changed
 - Reused: frozen-first rule, anchors decidable without gut feel, typed failure log with severity 1 to 3, acceptable gut call before scoring, CSV then validate, fake-row tests.
