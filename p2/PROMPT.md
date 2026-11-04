@@ -36,7 +36,7 @@ Observed 2026-11-04: all three models run on the current plan and are named in t
 
 | Arm | Model | Start image | Last frame | Reference image | 16:9 | Duration set | Other defaults touched |
 |---|---|---|---|---|---|---|---|
-| A | Gen-4.5 | yes | FILL | no (checked 2026-11-04) | yes | 5 s | audio off, enhancer off |
+| A | Gen-4.5 | yes | no end image; "use frame" only turns a frame of a generated clip into a new input (checked 2026-11-04) | no (checked 2026-11-04) | yes | 5 s | audio off, enhancer off |
 | B | Seedance 2.5 | yes | yes (listed) | yes (listed) | FILL | 5 s | audio off, enhancer off |
 | C | Gemini Omni 1.1 Flash | yes | FILL | yes (listed) | FILL | 5 s | audio off, enhancer off |
 
