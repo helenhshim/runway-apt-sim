@@ -38,7 +38,7 @@ Observed 2026-11-04: all three models run on the current plan and are named in t
 |---|---|---|---|---|---|---|---|
 | A | Gen-4.5 | yes | no end image; "use frame" only turns a frame of a generated clip into a new input (checked 2026-11-04) | no (checked 2026-11-04) | yes | 5 s | audio off, enhancer off |
 | B | Seedance 2.5 | yes | yes (checked 2026-11-04, not used) | yes (checked 2026-11-04, not used) | yes | 5 s | audio off, enhancer off |
-| C | Gemini Omni 1.1 Flash | yes | FILL | yes (listed) | FILL | 5 s | audio off, enhancer off |
+| C | Gemini Omni 1.1 Flash | yes | yes (checked 2026-11-04, not used) | yes (checked 2026-11-04, not used) | yes | 5 s | audio off, enhancer off |
 
 ## Run order (eval)
 A1, B1, C1, A2, B2, C2. Case id `astra_walk`.
