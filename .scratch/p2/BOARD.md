@@ -42,5 +42,6 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T35 | HEL-100 | Case study page | page session | Backlog | T22, T34 | Nov 6 |
 | T36 | HEL-101 | Narrated walkthrough (cut 4th) | Helen | Backlog | T35 | Nov 6 |
 | T37 | HEL-102 | Privacy pass and publish | Helen + agent | Backlog | T34, T35 | Nov 6 |
+| T38 | HEL-104 | Compare-across-models prototype: spec first | Helen + agent | In Progress 2026-11-04 (draft spec `p2/COMPARE_SPEC.md`; Helen decided T26 GWM probe shrinks to one cheap run; waiting on her 4 decisions in the spec and a check of Runway's Evaluate step in the dev portal) | T25 | Nov 5 |
 
 Descoped 2026-11-03: rubric-critic agent (Helen: not building a separate agent).
