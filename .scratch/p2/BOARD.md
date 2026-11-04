@@ -26,7 +26,7 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T20 | HEL-85 | Build log, test-first | agent | Done, verified (2bb46cd, 20 P2 tests pass) | none | Nov 3 |
 | T22 | HEL-86 | Gen-4.5 build: MVP clip | Helen | Done 2026-11-04 (b01, b02 logged, 975d8d1, 7bfe2b7; hero = b01, iterated not scored; link and 360 demo moved to HEL-103) | T19, T20 | Nov 4 |
 | T22b | HEL-103 | Gen-4.5 360 demo and private hero link upload | Helen | Backlog (later, with case study materials) | T22 | Nov 6 |
-| T21 | HEL-87 | Inventory and input baseline | agent + Helen | Backlog | T19 | Nov 4 |
+| T21 | HEL-87 | Inventory and input baseline | agent + Helen | Done 2026-11-04 (8 landmarks and furniture confirmed by Helen; baseline 4 of 8; Astra wall in render recorded; no hallway walk exists so reveal checks use start frame and photo A; written in p2/INVENTORY.md) | T19 | Nov 4 |
 | T23 | HEL-88 | Seedance 2.5 build | Helen | Done 2026-11-04 (b01, b02 plus accidental repeat logged, 9bac9f6, de0095c; 150 credits per clip; b01 audio-on deviation accepted) | T19, T20 | Nov 4 |
 | T24 | HEL-89 | Gemini Omni 1.1 Flash build | Helen | Done 2026-11-04 (b01, b02 logged, 836de3a, 6d2f3ff, 2851e56; 51 credits per clip; audio on by default for both, deviation accepted; both clips invented a side table beside the couch) | T19, T20 | Nov 4 |
 | T25 | HEL-93 | b03 fix on all three, side-by-side | Helen | Done 2026-11-04 (fix 2 iPhone grain line, 11a4ca5; 3 b03 rows logged de188ce, 6753515, e85ed9b; candidate eval prompt b03, backup b02; ladder step: keep 5 s push; Astra wall is in the render, not model invention) | T22, T23, T24 | Nov 4 |
