@@ -50,7 +50,19 @@ python3 p2/validate_build_log.py p2/build_log.csv
 | observation | One or two sentences in my words, with a timestamp in the clip if something broke |
 
 ## Hypotheses
-Drafts are in the PRD. Helen rewrites them in her own words, at most three, and they are copied here before the freeze with what would disprove each.
+Written 2026-11-04, in Helen's own words, before any scored clip. Measures are from `RUBRIC.md`. Same text as the PRD. With 2 clips per model, results are directional, not statistics.
+
+| # | Hypothesis (my words) | Measure | Kill condition (what would disprove it) |
+|---|---|---|---|
+| H1 | The model that looks most like real footage is not 1:1 with the render I provide and is more prone to making up furniture (Gemini). | Plan fidelity (criterion 2) against realism (criterion 3), mean of 2 clips per model, plus a count of pieces in the clip that are not in the render (for example the side table). | Gemini's plan fidelity is the same as or higher than Seedance's, or Gemini has no more invented pieces than either other model. |
+| H2 | The cheap one is close enough. I would have used Gemini over the 150 credits, and it was faster. | Gut-call acceptable rate and credits per acceptable clip (credits spent divided by acceptable clips), at 51 (Gemini), 60 (Gen-4.5) and 150 (Seedance) credits. | Gemini has fewer acceptable clips than Seedance. 1 of 2 acceptable counts as close enough; 0 of 2 does not. |
+| H3 | Failures start when something is hidden and comes back, or when an area the start frame never showed comes into view and the model makes something up (the side table). | Pop and morph events in criterion 4, plus invented pieces, split by whether they follow something returning from behind an object or a new area entering the frame, against drift or flicker with no such trigger. | Most temporal events across the 6 clips are not tied to something returning or an area newly coming into view. |
+
+**Scope note (Helen):** the test is a 5 s clip. On a longer clip, matching the render 1:1 would matter much more than realism, especially for this task, and that could vary task by task. H1 and H2 are claims about 5 s only.
+
+Stools: in the build, Gen-4.5's stools were wrong in b01 to b03 and Gemini's matched the real thing, so stools do not count against Gemini in H1.
+
+Build-phase observation, not a hypothesis (the prompt is frozen at the freeze): changing the prompt and the model made the clips look more like my room, but I would want to edit the pieces in the video model to match the original pieces, since the Astra render did not get them 1:1.
 
 ## Fairness rules
 - Same start frame (`evidence/p2_astra_start.png`), prompt text and settings for every arm.

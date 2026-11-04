@@ -31,7 +31,7 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T24 | HEL-89 | Gemini Omni 1.1 Flash build | Helen | Done 2026-11-04 (b01, b02 logged, 836de3a, 6d2f3ff, 2851e56; 51 credits per clip; audio on by default for both, deviation accepted; both clips invented a side table beside the couch) | T19, T20 | Nov 4 |
 | T25 | HEL-93 | b03 fix on all three, side-by-side | Helen | Done 2026-11-04 (fix 2 iPhone grain line, 11a4ca5; 3 b03 rows logged de188ce, 6753515, e85ed9b; candidate eval prompt b03, backup b02; ladder step: keep 5 s push; Astra wall is in the render, not model invention) | T22, T23, T24 | Nov 4 |
 | T26 | HEL-90 | GWM Worlds probe | Helen | Backlog | T19, T20 | Nov 4 |
-| T27 | HEL-91 | Hypotheses in my own words | Helen | Todo | none | Nov 4 |
+| T27 | HEL-91 | Hypotheses in my own words | Helen | Done 2026-11-04 (3 hypotheses in Helen's words with measure and kill condition: H1 control vs realism, H2 value, H3 when it breaks; in p2/README.md and the PRD, drafts replaced; 5 s scope noted) | none | Nov 4 |
 | T28 | HEL-95 | Freeze the P2 protocol | agent + Helen | Backlog | T21, T25, T26, T27 | Nov 5 |
 | T29 | HEL-96 | Generate the 6 scored clips | Helen | Backlog | T28 | Nov 5 |
 | T30 | HEL-97 | Blind scoring session | Helen + agent | Backlog | T29 | Nov 5 |
