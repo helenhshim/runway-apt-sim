@@ -29,7 +29,7 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T21 | HEL-87 | Inventory and input baseline | agent + Helen | Backlog | T19 | Nov 4 |
 | T23 | HEL-88 | Seedance 2.5 build | Helen | Done 2026-11-04 (b01, b02 plus accidental repeat logged, 9bac9f6, de0095c; 150 credits per clip; b01 audio-on deviation accepted) | T19, T20 | Nov 4 |
 | T24 | HEL-89 | Gemini Omni 1.1 Flash build | Helen | Done 2026-11-04 (b01, b02 logged, 836de3a, 6d2f3ff, 2851e56; 51 credits per clip; audio on by default for both, deviation accepted; both clips invented a side table beside the couch) | T19, T20 | Nov 4 |
-| T25 | HEL-93 | b03 fix on all three, side-by-side | Helen | Backlog | T22, T23, T24 | Nov 4 |
+| T25 | HEL-93 | b03 fix on all three, side-by-side | Helen | Done 2026-11-04 (fix 2 iPhone grain line, 11a4ca5; 3 b03 rows logged de188ce, 6753515, e85ed9b; candidate eval prompt b03, backup b02; ladder step: keep 5 s push; Astra wall is in the render, not model invention) | T22, T23, T24 | Nov 4 |
 | T26 | HEL-90 | GWM Worlds probe | Helen | Backlog | T19, T20 | Nov 4 |
 | T27 | HEL-91 | Hypotheses in my own words | Helen | Todo | none | Nov 4 |
 | T28 | HEL-95 | Freeze the P2 protocol | agent + Helen | Backlog | T21, T25, T26, T27 | Nov 5 |
