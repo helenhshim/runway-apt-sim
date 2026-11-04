@@ -1,1 +1,2 @@
 when,model,iteration,prompt_id,changed,credits_shown,balance_after,minutes,output_file,keep,tag,observation
+2026-11-04 15:05,Gen-4.5,b01,b01,,,2490,1.5,p2_A_b01_gen_4-5.mp4,yes,quality,"Kept. Nothing broke; camera moved forward; furniture held at about 90-95%. Stools and hallway bench reimagined, different from the render (identity). Close to my apartment but still somewhat like a 3D render (render_look). 16:9 offered; no reference image input. Cost 60 inferred: 2,250 before + 300 quest credits - 2,490 after; no cost shown before generating."

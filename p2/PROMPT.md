@@ -14,8 +14,8 @@ The real photos show my current furniture, not the plan. Prompts say to take onl
 `b01`, base:
 > Photorealistic phone video of this living room in daylight. The camera moves slowly forward in a straight line toward the hallway and the front door at the far end, at walking pace and eye level, without turning. Keep the room exactly as shown: the same walls, ceiling, doorways and floor, and every piece of furniture in the same place, shape and color. Nothing appears or disappears. Soft natural shadows under the furniture, real materials. No people, no text.
 
-`b02`, adds the reference (only if every arm takes one; otherwise `b02` is the same text with the reference described in words):
-> b01 text, then: Match the floor, walls and light to the reference photo of the real room. Use the reference only for materials and light, not for furniture.
+`b02`, materials in words (decided 2026-11-04: Gen-4.5 takes no reference image, so per the fairness rule no arm gets one; b02 describes the real materials instead):
+> b01 text, then: Real materials of this apartment: a dark brown wood plank floor with visible grain, matte white walls with white baseboards, and a step in the ceiling along the right wall. Shot on a phone, not a 3D render.
 
 `b03`, one fix chosen after watching `b01` and `b02` on all three arms, applied to all:
 | If I see | Add |
@@ -31,9 +31,12 @@ Each prompt is saved as `p2/prompts/bNN.txt` before use. Extra demo tries beyond
 The best of `b01` to `b03` across all three arms, not the best for one arm. Text and the reason it was picked go here: FILL.
 
 ## Settings (fill per arm before the freeze, then frozen)
+
+Observed 2026-11-04: all three models run on the current plan and are named in the picker, but the app shows no credit cost before generating. Cost per clip is therefore the balance before minus the balance after.
+
 | Arm | Model | Start image | Last frame | Reference image | 16:9 | Duration set | Other defaults touched |
 |---|---|---|---|---|---|---|---|
-| A | Gen-4.5 | yes | FILL | FILL | FILL | 5 s | audio off, enhancer off |
+| A | Gen-4.5 | yes | FILL | no (checked 2026-11-04) | yes | 5 s | audio off, enhancer off |
 | B | Seedance 2.5 | yes | yes (listed) | yes (listed) | FILL | 5 s | audio off, enhancer off |
 | C | Gemini Omni 1.1 Flash | yes | FILL | yes (listed) | FILL | 5 s | audio off, enhancer off |
 

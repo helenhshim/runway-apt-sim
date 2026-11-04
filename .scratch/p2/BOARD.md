@@ -22,9 +22,9 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 ## Tickets
 | Ticket | Linear | What | Owner | Status | Blocked by | Due |
 |---|---|---|---|---|---|---|
-| T19 | HEL-84 | Inputs ready: photos, walk, renders, app checks | Helen | In Progress (re-renders made, not yet saved) | none | Nov 3 |
+| T19 | HEL-84 | Inputs ready: photos, walk, renders, app checks | Helen | Done 2026-11-04 (all 3 models run on current plan; costs not shown upfront; 16:9, last frame, reference checks moved to T22 to T24) | none | Nov 3 |
 | T20 | HEL-85 | Build log, test-first | agent | Done, verified (2bb46cd, 20 P2 tests pass) | none | Nov 3 |
-| T22 | HEL-86 | Gen-4.5 build: MVP clip | Helen | Todo | T19, T20 | Nov 3 |
+| T22 | HEL-86 | Gen-4.5 build: MVP clip | Helen | In Progress | T19, T20 | Nov 4 |
 | T21 | HEL-87 | Inventory and input baseline | agent + Helen | Backlog | T19 | Nov 4 |
 | T23 | HEL-88 | Seedance 2.5 build | Helen | Backlog | T19, T20 | Nov 4 |
 | T24 | HEL-89 | Gemini Omni 1.1 Flash build | Helen | Backlog | T19, T20 | Nov 4 |
