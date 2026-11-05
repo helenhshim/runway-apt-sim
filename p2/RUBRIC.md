@@ -1,10 +1,10 @@
-# Rubric p2 (DRAFT, frozen with the P2 protocol commit)
+# Rubric p2 (FROZEN 2026-11-04, with the P2 protocol commit)
 
 Each scored clip gets 1 to 5 on four criteria. Anchors are fixed before the first scored clip and meant to be decidable without a gut feel. If a score is still a coin flip, pick the lower one and write both numbers in `notes`. Score clips by their `blind_id` (see `blind.py`), in the shuffled order, in a Claude session that writes each row to `p2/log.csv`, validates it, and keeps my words in `p2/scoring_notes.md`.
 
 What each criterion is judged against:
 - **The start frame** (`p2_astra_start.png`) for the plan: furniture and the room as rendered. The Astra render is AI-generated, so "kept" means kept from the plan.
-- **The real photo and the phone walk** for what my room actually looks like: materials, light, and anything the start frame does not show.
+- **The real photo A** (`p2_photo_a.jpg`, same spot, same hallway end) for what my room actually looks like: materials, light, and anything the start frame does not show. No phone walk exists (see `INVENTORY.md`).
 
 Log column names stay as in `schema.sql`: `geometry` = criterion 1, `plan` = 2, `realism` = 3, `temporal` = 4.
 
@@ -21,12 +21,12 @@ Part one, landmarks. At each sample frame after frame 1 (25%, 50%, 75%, 100%), f
 | 0.50 to under 0.70 | 2 |
 | under 0.50 | 1 |
 
-Part two, reveal checks (`INVENTORY.md`), judged against the phone walk. Each failed reveal check lowers the base score by 1, to a minimum of 1. A reveal check that never comes into view is not counted; note it.
+Part two, reveal checks (`INVENTORY.md`), judged against photo A and the start frame. Each failed reveal check lowers the base score by 1, to a minimum of 1. A reveal check that never comes into view is not counted; note it.
 
 Caps: an opening added, removed or closed caps at 1. Walls or ceiling visibly bending caps at 2.
 
 ## 2. Plan fidelity (log column `plan`)
-Each piece listed in `INVENTORY.md`, over the whole clip:
+Each piece listed in `INVENTORY.md`, over the whole clip. Pieces that are not in the start frame are not listed here; they count as `pop` in criterion 4.
 
 | Call | Meaning |
 |---|---|
@@ -64,7 +64,7 @@ A flaw is minor if visible only when paused or zoomed, clear if visible at norma
 Watch twice at full speed, then frame by frame through any span that looked wrong. Count events:
 - **flicker:** texture or light pulsing.
 - **morph:** a piece or surface changes shape or identity, including growing or shrinking against the room (scale constancy).
-- **pop:** something appears or disappears without being hidden by something else (object permanence).
+- **pop:** something appears or disappears without being hidden by something else (object permanence). An invented piece that is not in the start frame (for example the side table beside the couch) is a pop, counted here and not in criterion 2. It is also counted in the invented-pieces tally used for H1 (`notes`).
 - **drift:** architecture slides or warps, near and far things move at the wrong relative speeds (parallax), or light and shadows move with the screen instead of staying fixed to the room.
 - **path:** the camera does not move forward as asked (turns, stops, reverses) or the clip freezes.
 

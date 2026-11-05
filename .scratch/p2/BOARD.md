@@ -32,10 +32,10 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T25 | HEL-93 | b03 fix on all three, side-by-side | Helen | Done 2026-11-04 (fix 2 iPhone grain line, 11a4ca5; 3 b03 rows logged de188ce, 6753515, e85ed9b; candidate eval prompt b03, backup b02; ladder step: keep 5 s push; Astra wall is in the render, not model invention) | T22, T23, T24 | Nov 4 |
 | T26 | HEL-90 | GWM Worlds probe | Helen | Backlog | T19, T20 | Nov 4 |
 | T27 | HEL-91 | Hypotheses in my own words | Helen | Done 2026-11-04 (3 hypotheses in Helen's words with measure and kill condition: H1 control vs realism, H2 value, H3 when it breaks; in p2/README.md and the PRD, drafts replaced; 5 s scope noted) | none | Nov 4 |
-| T28 | HEL-95 | Freeze the P2 protocol | agent + Helen | Backlog | T21, T25, T26, T27 | Nov 5 |
+| T28 | HEL-95 | Freeze the P2 protocol | agent + Helen | In Progress 2026-11-04 (FILL slots written in README, PROMPT, RUBRIC, INVENTORY, p2v1.txt, uncommitted; GWM deferred and removed from the gate; waiting on Helen's rubric rehearsal on one build clip, then tests, freeze commit, push, PRD log) | T21, T25, T27 (T26 removed 2026-11-04) | Nov 5 |
 | T29 | HEL-96 | Generate the 6 scored clips | Helen | Backlog | T28 | Nov 5 |
 | T30 | HEL-97 | Blind scoring session | Helen + agent | Backlog | T29 | Nov 5 |
-| T31 | HEL-92 | Summary script and results JSON | agent | Backlog | none | Nov 5 |
+| T31 | HEL-92 | Summary script and results JSON | agent | Done 2026-11-05 (258401f, pushed; 34 tests pass, 13 new with hand-computed numbers; README Files-table line uncommitted). Shape agreement with the page session moved to T35 (`p2/summarize_p2.py`, `p2/tests/test_summarize_p2.py`) | none | Nov 5 |
 | T32 | HEL-94 | Automated metric (cut 1st) | agent | In Progress 2026-11-05 (p2/warp_metric.py + test; ran on 9 build clips, numbers in Linear comment; scored-clip run and spike-vs-tag agreement wait on T29/T30) | T22 | Nov 5 |
 | T33 | HEL-98 | 24 h re-score (cut 2nd) | Helen | Backlog | T30 | Nov 6 |
 | T34 | HEL-99 | Findings, recommendations, launch proposal | Helen + agent | Backlog | T30, T31 | Nov 6 |

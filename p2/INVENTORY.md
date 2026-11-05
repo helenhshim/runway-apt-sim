@@ -1,4 +1,4 @@
-# Inventory (DRAFT, filled from the Astra start frame before the freeze)
+# Inventory (FROZEN 2026-11-04, filled from the Astra start frame)
 
 Read off `evidence/p2_astra_start.png`. Positions are percent across, percent down. Nothing here changes after the freeze.
 
@@ -23,7 +23,7 @@ Method: positions read by eye off a 5% grid on both images (about 1% error), `p2
 Render-vs-room mismatch (Astra's output, not a video model's invention): the render has a wall across from the hallway bench that is not in the real room. Photo A shows an open hallway there (with moving boxes). Any clip that keeps that wall is keeping the plan's render, not inventing it.
 
 ## Sample frames
-At 0%, 25%, 50%, 75% and 100% of each output clip's own duration. Ground-truth frames at the same percentages come from `p2_walk.mp4`.
+At 0%, 25%, 50%, 75% and 100% of each output clip's own duration. There are no ground-truth walk frames (`p2_walk.mp4` was never recorded); the reference is `p2_photo_a.jpg`.
 
 Getting frames: with ffmpeg (`brew install ffmpeg`), `ffmpeg -ss <seconds> -i clip.mp4 -frames:v 1 out.png`. Without it, pause in QuickTime and screenshot the video area only.
 
@@ -42,11 +42,11 @@ Chosen on the start frame, only things that also exist in my real room: corners,
 | 8 | Left doorway recess, right edge (vertical edge on the hallway side) | 40.7, 35 |
 
 ## Reveal checks (what the start frame does not fully show)
-Things that come into view as the camera moves forward, checked against `p2_walk.mp4`:
+Things that come into view as the camera moves forward, checked against `p2_photo_a.jpg` and the start frame:
 1. The front door at the end of the hallway: present, dark, in the right place.
 2. The open doorway on the left of the far wall stays open, with nothing invented behind it.
 3. The ceiling step continues along the right wall into the hallway.
-Note (2026-11-04): there is no usable hallway-direction phone walk (`p2_walk.mp4` was never recorded; the one phone clip walks the other way). These three checks are written from the start frame and the real photo A, which shows the same hallway end: dark front door, left doorway recess, ceiling step along the right wall. Reveal checks are judged against photo A and the start frame, and ground-truth sample frames from a walk do not exist. Settle at the freeze (T28) whether `RUBRIC.md`, `README.md` and `PROMPT.md` wording about the walk changes.
+Note (2026-11-04): there is no usable hallway-direction phone walk (`p2_walk.mp4` was never recorded; the one phone clip walks the other way). These three checks are written from the start frame and the real photo A, which shows the same hallway end: dark front door, left doorway recess, ceiling step along the right wall. Reveal checks are judged against photo A and the start frame, and ground-truth sample frames from a walk do not exist. Settled at the freeze (T28, 2026-11-04): `RUBRIC.md`, `PROMPT.md`, `FAILURE_TYPES.md` and this file now name photo A and the start frame instead of the walk.
 
 ## Furniture pieces (from the Astra plan, as visible in the start frame)
 Hero pieces are marked H. Keep only what the start frame shows.

@@ -20,7 +20,7 @@ One failure row per clip that broke. Pick the single most important type; mentio
 ## New in P2
 | failure_type | Definition |
 |---|---|
-| invented_area | Space the start frame does not show is invented wrong as the camera moves: an extra room, a different hallway, a wall or door that is not in the real room (judged against the phone walk) |
+| invented_area | Space the start frame does not show is invented wrong as the camera moves: an extra room, a different hallway, a wall or door that is not in the real room (judged against photo A and the start frame) |
 | flicker | Texture, light or color pulses from frame to frame |
 | morph | A piece or surface changes shape or identity over time |
 | pop | Something appears or disappears without being hidden by something else |

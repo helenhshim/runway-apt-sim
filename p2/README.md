@@ -1,4 +1,4 @@
-# P2: Astra render to real-world video (DRAFT, not frozen)
+# P2: Astra render to real-world video (FROZEN 2026-11-04)
 
 P1 (`protocol/`, frozen at 1e24e9e) tested image staging and stopped after one formal run. P2 is the headline. Nothing in `protocol/` changes.
 
@@ -6,28 +6,29 @@ P1 (`protocol/`, frozen at 1e24e9e) tested image staging and stopped after one f
 - **Why this test:** I want to see my real apartment with the furniture I planned, as real-world video. Going from a 3D plan straight to video tests scene understanding, which is where Runway is heading (GWM).
 - **Surface:** Runway's video model picker, model chosen by hand. Not Agent: in P1, Agent picked the model (Nano Banana Pro), and here the model is the variable.
 - **Arms (locked 2026-11-03):** A = Runway Gen-4.5, B = Seedance 2.5, C = Gemini Omni 1.1 Flash. All at 720p, 16:9, 5 s, start frame only. Picked functional first (takes a start image), then by image-to-video leaderboard rank, then in the picker; see `I2V_RESEARCH.md`.
-- **Probe, not scored against the arms:** GWM Worlds, Runway's world model built on Gen-4.5. Gate before the freeze: the Astra still uploads as the first frame, a 5 s clip exports, and a credit cost shows. If any fails, that is a finding and GWM stays out.
+- **GWM Worlds (deferred, outside the frozen protocol):** Runway's world model built on Gen-4.5. Helen deprioritized the probe on 2026-11-04 and removed it as a blocker of the freeze. It is not one of the arms, is not scored, and has no gate. If it is run later, it is reported as a separate, unscored side note and changes nothing here.
 - **Design:** build first (3 iterations per arm, logged, never scored), then a frozen eval of 3 arms x 2 attempts = 6 scored clips. Same start frame, prompt, settings and duration for every arm. Interleaved run order. Shuffled, renamed clips for scoring.
-- **Rule:** the rubric, prompt, inventory and log schema are committed and pushed to a public repo before the first scored clip.
-- **Status:** draft. One scorer, one room, n = 2 per arm.
+- **Rule:** the rubric, prompt, inventory and log schema are committed and pushed before the first scored clip. At freeze time the repo (`helenhshim/runway-apt-sim`) was **private**; it is made public at publish (T37). The commit date still proves the protocol came first.
+- **Status:** frozen. One scorer, one room, n = 2 per arm. Eval prompt `p2v1` = build prompt `b03` (see `PROMPT.md`).
 
 The Astra render is AI-generated from photos, not measured.
 
 ## Files
 | File | What |
 |---|---|
-| `PROMPT.md` | Inputs, build prompts, eval prompt slot, settings per arm, run order, GWM probe |
+| `PROMPT.md` | Inputs, build prompts, frozen eval prompt `p2v1`, settings per arm, run order, GWM (deferred) |
 | `INVENTORY.md` | Landmarks and furniture read off the Astra start frame, the input baseline check, ground-truth files |
 | `RUBRIC.md` | Four criteria, 1 to 5 anchors, acceptable gut call, severity |
 | `FAILURE_TYPES.md` | Failure types, including temporal ones (must match `validate_p2.py`) |
 | `schema.sql`, `validate_p2.py` | 24-column log, one row per scored clip, and its validator |
+| `summarize_p2.py` | Refuses an invalid or unscored log; prints per-model numbers and writes `results_p2.json` (T31) |
 | `blind.py` | Copies clips to random ids for scoring, key kept in `evidence/` |
 | `build_log.csv`, `validate_build_log.py` | One row per build generation (never scored) and its check |
-| `prompts/` | Build prompts `b01`, `b02` (and `b03` once chosen), exactly as pasted into the app |
+| `prompts/` | Build prompts `b01`, `b02`, `b03` and the frozen eval prompt `p2v1`, exactly as pasted into the app |
 | `I2V_RESEARCH.md` | Current model research (image to video, GWM, failure modes) |
 | `MODEL_SELECTION.md`, `EVAL_RESEARCH.md` | Earlier research pass (video editing, eval methods, world models) |
-| `tests/` | Fake rows only: `python3 -m unittest discover -s p2/tests -v` |
 | `warp_metric.py` | Automated flow-based warping error per clip, with floor and spike times (T32); test in `tests/test_warp_metric.py` |
+| `tests/` | Fake rows only: `python3 -m unittest discover -s p2/tests -v` |
 
 ## Logging a build generation
 Within 5 minutes of each generation, add one row to `build_log.csv` (or tell Claude in this session and it adds the row), then run:
@@ -77,19 +78,22 @@ Build-phase observation, not a hypothesis (the prompt is frozen at the freeze): 
 ## Stop rules and fallback ladder
 - Exactly 2 scored clips per arm, acceptable or not.
 - An error, refusal or timeout gets one retry with nothing changed. Not scored; credits logged in `notes` and the ledger.
-- Fallback ladder, decided now: if the build shows no arm can hold a 5 s push, the eval uses a 3 s push; if that fails too, a locked-off shot with subtle motion. The step is chosen at the freeze from build evidence, never mid-eval.
+- Fallback ladder (chosen at the freeze from build evidence): **keep the 5 s push.** All three arms held a 5 s forward push in b01 to b03 (no `path` failure logged), so the 3 s push and the locked-off shot are not used. No change mid-eval.
 - If prices put the plan over the cap, drop an arm before the freeze, never mid-run.
 
-## Budget (from Runway's pages; fill from the app before the freeze)
-| Arm | Model | Credits per 5 s at 720p (listed) | From the app |
+## Budget (listed prices, and the cost read from the app balance)
+The app shows no cost before generating, so the cost per clip is the balance before minus the balance after (`build_log.csv`, every build row).
+| Arm | Model | Credits per 5 s at 720p (listed) | From the app (inferred from balance differences, all build rows) |
 |---|---|---|---|
-| A | Gen-4.5 | about 60 | FILL |
-| B | Seedance 2.5 | about 150 (80 minimum) | FILL |
-| C | Gemini Omni 1.1 Flash | about 50 | FILL |
+| A | Gen-4.5 | about 60 | 60 |
+| B | Seedance 2.5 | about 150 (80 minimum) | 150 |
+| C | Gemini Omni 1.1 Flash | about 50 | 51 |
+
+Eval cost: 2 clips per arm = 120 + 300 + 102 = 522 credits, plus any retry.
 
 5 clips per arm (3 build, 2 eval) is about 1,300 credits plus drafts and retries. Runway Pro for one month.
 
-## Filled before the freeze
+## Filled before the freeze (all done 2026-11-04)
 1. Prices and input support per arm (tables above and in `PROMPT.md`).
 2. Start frame saved, its landmarks and pieces written in `INVENTORY.md`, and the input baseline check done.
 3. The eval prompt chosen from the build iterations, with the reason.
@@ -100,4 +104,4 @@ Build-phase observation, not a hypothesis (the prompt is frozen at the freeze): 
 ## What is reused from P1 and what changed
 - Reused: frozen-first rule, anchors decidable without gut feel, typed failure log with severity 1 to 3, acceptable gut call before scoring, CSV then validate, fake-row tests.
 - Changed: image to video instead of image editing; criteria are real-room fidelity, plan fidelity, realism and temporal and scene consistency; new failure types; a 24-column log with `arm` and `blind_id`. The column names `geometry` and `temporal` keep their names but follow the new definitions in `RUBRIC.md`.
-- Not yet built: the build log check and the P2 summary script that writes `p2/results_p2.json` (the P1 `results.json` shape is untouched).
+- Not yet built at freeze: the P2 summary script that writes `p2/results_p2.json` (T31; the P1 `results.json` shape is untouched). The build log check exists (`validate_build_log.py`).
