@@ -203,6 +203,20 @@ class SummarizeTest(unittest.TestCase):
             self.assertIn(model, out)
         self.assertIn("results_p2.json", out)
 
+    def test_accept_column_prints_count_of_clips_not_a_bare_rate(self):
+        # A bare rate ("1" for 2 of 2) reads like a count next to "clips 2". Print "2/2" instead.
+        # By hand: A 2 of 2 acceptable, B 1 of 2, C 1 of 2.
+        code, out = self.run_cli(ROWS)
+        self.assertEqual(code, 0)
+        lines = {m: next(l for l in out.splitlines() if m in l)
+                 for m in ("Gen-4.5", "Seedance 2.5", "Gemini Omni 1.1 Flash")}
+        self.assertIn(" 2/2 ", lines["Gen-4.5"])
+        self.assertIn(" 1/2 ", lines["Seedance 2.5"])
+        self.assertIn(" 1/2 ", lines["Gemini Omni 1.1 Flash"])
+        header = out.splitlines()[0]
+        self.assertIn("acc/n", header)
+        self.assertNotIn(" accept", header)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "clips": 6,
+  "arms": {
+    "A": {
+      "model_shown": "Gen-4.5",
+      "clips": 2,
+      "acceptable": 0,
+      "acceptable_rate": 0.0,
+      "scores": {
+        "geometry": {
+          "mean": 1.0,
+          "best": 1
+        },
+        "plan": {
+          "mean": 3.0,
+          "best": 3
+        },
+        "realism": {
+          "mean": 3.5,
+          "best": 4
+        },
+        "temporal": {
+          "mean": 3.5,
+          "best": 5
+        }
+      },
+      "temporal_events_mean": 1.0,
+      "credits_total": 115.0,
+      "minutes_total": 2.0,
+      "credits_per_acceptable": null,
+      "minutes_per_acceptable": null,
+      "failures_by_type": {
+        "invented_area": 1,
+        "opening": 1
+      }
+    },
+    "B": {
+      "model_shown": "Seedance 2.5",
+      "clips": 2,
+      "acceptable": 2,
+      "acceptable_rate": 1.0,
+      "scores": {
+        "geometry": {
+          "mean": 5.0,
+          "best": 5
+        },
+        "plan": {
+          "mean": 5.0,
+          "best": 5
+        },
+        "realism": {
+          "mean": 4.0,
+          "best": 4
+        },
+        "temporal": {
+          "mean": 5.0,
+          "best": 5
+        }
+      },
+      "temporal_events_mean": 0.0,
+      "credits_total": 300.0,
+      "minutes_total": 5.0,
+      "credits_per_acceptable": 150.0,
+      "minutes_per_acceptable": 2.5,
+      "failures_by_type": {}
+    },
+    "C": {
+      "model_shown": "Gemini Omni 1.1 Flash",
+      "clips": 2,
+      "acceptable": 1,
+      "acceptable_rate": 0.5,
+      "scores": {
+        "geometry": {
+          "mean": 3.0,
+          "best": 5
+        },
+        "plan": {
+          "mean": 3.0,
+          "best": 5
+        },
+        "realism": {
+          "mean": 4.5,
+          "best": 5
+        },
+        "temporal": {
+          "mean": 3.5,
+          "best": 5
+        }
+      },
+      "temporal_events_mean": 1.5,
+      "credits_total": 102.0,
+      "minutes_total": 2.0,
+      "credits_per_acceptable": 102.0,
+      "minutes_per_acceptable": 2.0,
+      "failures_by_type": {
+        "identity": 1
+      }
+    }
+  },
+  "failures_by_type": {
+    "identity": 1,
+    "invented_area": 1,
+    "opening": 1
+  },
+  "gut_call": {
+    "clips": 6,
+    "agree": 6,
+    "agreement_rate": 1.0,
+    "acceptable_but_scored_below_4": 0,
+    "unacceptable_but_all_4_plus": 0
+  },
+  "clip_scores": [
+    {
+      "blind_id": "B01",
+      "arm": "B",
+      "attempt": 2,
+      "acceptable": 1,
+      "geometry": 5,
+      "plan": 5,
+      "realism": 4,
+      "temporal": 5,
+      "temporal_events": 0,
+      "all_four_4_plus": true,
+      "failure_type": null,
+      "severity": null
+    },
+    {
+      "blind_id": "B02",
+      "arm": "B",
+      "attempt": 1,
+      "acceptable": 1,
+      "geometry": 5,
+      "plan": 5,
+      "realism": 4,
+      "temporal": 5,
+      "temporal_events": 0,
+      "all_four_4_plus": true,
+      "failure_type": null,
+      "severity": null
+    },
+    {
+      "blind_id": "B03",
+      "arm": "A",
+      "attempt": 2,
+      "acceptable": 0,
+      "geometry": 1,
+      "plan": 3,
+      "realism": 3,
+      "temporal": 2,
+      "temporal_events": 2,
+      "all_four_4_plus": false,
+      "failure_type": "invented_area",
+      "severity": 2
+    },
+    {
+      "blind_id": "B04",
+      "arm": "C",
+      "attempt": 2,
+      "acceptable": 1,
+      "geometry": 5,
+      "plan": 5,
+      "realism": 4,
+      "temporal": 5,
+      "temporal_events": 0,
+      "all_four_4_plus": true,
+      "failure_type": null,
+      "severity": null
+    },
+    {
+      "blind_id": "B05",
+      "arm": "A",
+      "attempt": 1,
+      "acceptable": 0,
+      "geometry": 1,
+      "plan": 3,
+      "realism": 4,
+      "temporal": 5,
+      "temporal_events": 0,
+      "all_four_4_plus": false,
+      "failure_type": "opening",
+      "severity": 2
+    },
+    {
+      "blind_id": "B06",
+      "arm": "C",
+      "attempt": 1,
+      "acceptable": 0,
+      "geometry": 1,
+      "plan": 1,
+      "realism": 5,
+      "temporal": 2,
+      "temporal_events": 3,
+      "all_four_4_plus": false,
+      "failure_type": "identity",
+      "severity": 3
+    }
+  ]
+}

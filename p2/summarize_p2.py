@@ -102,13 +102,14 @@ def _fmt(x):
 
 
 def print_table(results):
-    print(f"{'arm':<4}{'model':<24}{'clips':>5}{'accept':>8}"
+    print(f"{'arm':<4}{'model':<24}{'clips':>5}{'acc/n':>8}"
           f"{'geom':>11}{'plan':>11}{'real':>11}{'temp':>11}{'cred/acc':>10}{'min/acc':>9}")
     for arm, a in results["arms"].items():
         cells = "".join(f"{a['scores'][s]['mean']:>6g}/{a['scores'][s]['best']:<4}" for s in SCORES)
-        print(f"{arm:<4}{a['model_shown']:<24}{a['clips']:>5}{a['acceptable_rate']:>8g}"
+        acc = f"{a['acceptable']}/{a['clips']}"
+        print(f"{arm:<4}{a['model_shown']:<24}{a['clips']:>5}{acc:>7} "
               f"{cells}{_fmt(a['credits_per_acceptable']):>10}{_fmt(a['minutes_per_acceptable']):>9}")
-    print("(scores are mean/best of the arm's clips)")
+    print("(acc/n = gut-call acceptable clips of the arm's clips; scores are mean/best of the arm's clips)")
     print("failures by type:", results["failures_by_type"] or "none")
     g = results["gut_call"]
     print(f"gut call agrees with all-four-at-4+ on {g['agree']} of {g['clips']} clips "
