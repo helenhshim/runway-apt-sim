@@ -37,7 +37,7 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T30 | HEL-97 | Blind scoring session | Helen + agent | Done 2026-11-05 (6 of 6 scored blind B01 to B06, key opened after the last row, p2/log.csv validates, 39 tests pass; scores in p2/scoring_notes.md; T33 re-score and T34 findings unblocked; rehearsal Temporal re-score (T28) still open and separate) | T29 | Nov 5 |
 | T31 | HEL-92 | Summary script and results JSON | agent | Done 2026-11-05 (258401f, pushed; 34 tests pass, 13 new with hand-computed numbers; README Files-table line uncommitted). Shape agreement with the page session moved to T35 (`p2/summarize_p2.py`, `p2/tests/test_summarize_p2.py`) | none | Nov 5 |
 | T32 | HEL-94 | Automated metric (cut 1st) | agent | In Progress 2026-11-05 (p2/warp_metric.py + test; ran on 9 build clips, numbers in Linear comment; ran on the 6 scored clips 2026-11-05, numbers withheld until T30 blind scoring is done; spike-vs-tag agreement waits on T30 tags) | T22 | Nov 5 |
-| T33 | HEL-98 | 24 h re-score (cut 2nd) | Helen | Backlog | T30 | Nov 6 |
+| T33 | HEL-98 | 24 h re-score (cut 2nd) | Helen | Canceled 2026-11-05 (Helen cancelled; findings report single-pass scoring only) | T30 | Nov 6 |
 | T34 | HEL-99 | Findings, recommendations, launch proposal | Helen + agent | Backlog | T30, T31 | Nov 6 |
 | T35 | HEL-100 | Case study page | page session | Backlog | T22, T34 | Nov 6 |
 | T36 | HEL-101 | Narrated walkthrough (cut 4th) | Helen | Backlog | T35 | Nov 6 |
