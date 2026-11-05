@@ -36,7 +36,7 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T29 | HEL-96 | Generate the 6 scored clips | Helen | Done 2026-11-05 (6 of 6 generated and logged in p2/log.csv, unscored, validator OK, 39 tests pass, 6 mp4s in evidence/. Gut calls: A1 no, B1 yes, C1 no, A2 no, B2 yes, C2 yes. Deviations: A1 cost 55 not 60; B2 was an accidental Seedance generation accepted as B2 (out of order, 150 credits); Gemini audio forced on) | T28 | Nov 5 |
 | T30 | HEL-97 | Blind scoring session | Helen + agent | Backlog | T29 | Nov 5 |
 | T31 | HEL-92 | Summary script and results JSON | agent | Done 2026-11-05 (258401f, pushed; 34 tests pass, 13 new with hand-computed numbers; README Files-table line uncommitted). Shape agreement with the page session moved to T35 (`p2/summarize_p2.py`, `p2/tests/test_summarize_p2.py`) | none | Nov 5 |
-| T32 | HEL-94 | Automated metric (cut 1st) | agent | In Progress 2026-11-05 (p2/warp_metric.py + test; ran on 9 build clips, numbers in Linear comment; scored-clip run and spike-vs-tag agreement wait on T29/T30) | T22 | Nov 5 |
+| T32 | HEL-94 | Automated metric (cut 1st) | agent | In Progress 2026-11-05 (p2/warp_metric.py + test; ran on 9 build clips, numbers in Linear comment; ran on the 6 scored clips 2026-11-05, numbers withheld until T30 blind scoring is done; spike-vs-tag agreement waits on T30 tags) | T22 | Nov 5 |
 | T33 | HEL-98 | 24 h re-score (cut 2nd) | Helen | Backlog | T30 | Nov 6 |
 | T34 | HEL-99 | Findings, recommendations, launch proposal | Helen + agent | Backlog | T30, T31 | Nov 6 |
 | T35 | HEL-100 | Case study page | page session | Backlog | T22, T34 | Nov 6 |
