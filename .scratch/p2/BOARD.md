@@ -36,7 +36,7 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T29 | HEL-96 | Generate the 6 scored clips | Helen | Backlog | T28 | Nov 5 |
 | T30 | HEL-97 | Blind scoring session | Helen + agent | Backlog | T29 | Nov 5 |
 | T31 | HEL-92 | Summary script and results JSON | agent | Backlog | none | Nov 5 |
-| T32 | HEL-94 | Automated metric (cut 1st) | agent | Backlog | T22 | Nov 5 |
+| T32 | HEL-94 | Automated metric (cut 1st) | agent | In Progress 2026-11-05 (p2/warp_metric.py + test; ran on 9 build clips, numbers in Linear comment; scored-clip run and spike-vs-tag agreement wait on T29/T30) | T22 | Nov 5 |
 | T33 | HEL-98 | 24 h re-score (cut 2nd) | Helen | Backlog | T30 | Nov 6 |
 | T34 | HEL-99 | Findings, recommendations, launch proposal | Helen + agent | Backlog | T30, T31 | Nov 6 |
 | T35 | HEL-100 | Case study page | page session | Backlog | T22, T34 | Nov 6 |

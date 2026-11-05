@@ -27,6 +27,7 @@ The Astra render is AI-generated from photos, not measured.
 | `I2V_RESEARCH.md` | Current model research (image to video, GWM, failure modes) |
 | `MODEL_SELECTION.md`, `EVAL_RESEARCH.md` | Earlier research pass (video editing, eval methods, world models) |
 | `tests/` | Fake rows only: `python3 -m unittest discover -s p2/tests -v` |
+| `warp_metric.py` | Automated flow-based warping error per clip, with floor and spike times (T32); test in `tests/test_warp_metric.py` |
 
 ## Logging a build generation
 Within 5 minutes of each generation, add one row to `build_log.csv` (or tell Claude in this session and it adds the row), then run:
