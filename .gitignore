@@ -3,3 +3,6 @@ results.json
 __pycache__/
 evidence/*
 !evidence/README.md
+
+# P1 board stays local (T37 privacy pass)
+.scratch/staging-eval/
