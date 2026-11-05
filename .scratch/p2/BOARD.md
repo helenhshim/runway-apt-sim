@@ -42,6 +42,6 @@ Rules: one writer per file; check `git status` before editing; a session's "done
 | T35 | HEL-100 | Case study page | page session | Done 2026-11-05 (approved by Helen on the Vercel preview; helen-portfolio branch hel-100-p2-case-study at 15631d7, pushed, not merged; P2 gated off production until T37 flips P2_PUBLISHED in p2.ts; stills and photo A only, no clips; P1 pilot collapsed; also shipped case study typography: 600px measure, 15/21 body, 13/18 tables) | T22, T34 | Nov 6 |
 | T36 | HEL-101 | Narrated walkthrough (cut 4th) | Helen | Backlog | T35 | Nov 6 |
 | T37 | HEL-102 | Privacy pass and publish | Helen + agent | Backlog | T34, T35 | Nov 6 |
-| T38 | HEL-104 | Compare-across-models prototype: spec first | Helen + agent | In Progress 2026-11-04 (draft spec `p2/COMPARE_SPEC.md`; Helen decided T26 GWM probe shrinks to one cheap run; waiting on her 4 decisions in the spec and a check of Runway's Evaluate step in the dev portal) | T25 | Nov 5 |
+| T38 | HEL-104 | Compare-across-models prototype: spec first | Helen + agent | Canceled 2026-11-05 (Helen canceled; draft spec stays in p2/COMPARE_SPEC.md) | T25 | Nov 5 |
 
 Descoped 2026-11-03: rubric-critic agent (Helen: not building a separate agent).
