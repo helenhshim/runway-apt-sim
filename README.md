@@ -45,6 +45,6 @@ The project started as a test of Runway image staging: add one chair to a photo 
 - PRD: https://claude.ai/artifact/KJg6jC6r43XgmDL9qmUNJ3 (with Research and Files tabs)
 - Technical design: https://claude.ai/artifact/HjRds5ARxNi57dgayN8mLQ
 - Tickets: Linear project "Runway eval: Astra render to real-world video (P2)"
-- Case study: https://www.helenshim.me/projects/astra-room-models
+- Case study: https://www.helenshim.me/projects/runway-room-video (part 1, the Astra 3D models: https://www.helenshim.me/projects/astra-room-models)
 
 Scaffolding (validators, blind-scoring script, roll-up, tests) was written with Claude Code.
