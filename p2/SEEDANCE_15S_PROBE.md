@@ -1,4 +1,4 @@
-# Long-walk probe: GWM gate and a 15 s Seedance walk (T26, HEL-90)
+# Seedance 15 s probe: GWM gate and a 15 s Seedance walk (T26, HEL-90)
 
 Post-freeze exploration, 2026-11-05. Never mixed into the 6 scored rows in `p2/log.csv`. Scores below use the frozen rubric but are one person's single pass on one clip, not blind.
 
